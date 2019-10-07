@@ -15,4 +15,6 @@ fs.writeFileSync('1-json.json', bookJson)
 const dataBuffer = fs.readFileSync('1-json.json')
 const dataJson = dataBuffer.toString()
 const data = JSON.parse(dataJson)
-console.log(data.title)
+data.name = 'Irving Lop'
+const newJson = JSON.stringify(data)
+fs.writeFileSync('1-json.json', newJson)
