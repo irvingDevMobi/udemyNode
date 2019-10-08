@@ -21,6 +21,19 @@ const addNote = function (title, body) {
     }
 }
 
+const removeNote = function(title) {
+    const notes = loadNotes()
+    const target = notes.filter(function (note) {
+        return note.title === title
+    })
+    if (target.length > 0) {
+        delete notes[title]
+        console.log('Note Deleted!!!')
+    } else {
+        console.log('There is not note with that name')
+    }
+}
+
 const saveNotes = function (notes) {
     const dataJson = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJson)
