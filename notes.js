@@ -4,11 +4,11 @@ const getNotes = function () {
     return 'Your notes ..'
 }
 
-const addNote = function (title, body) {
+const addNote = (title, body) => {
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const duplicateNotes = notes.filter((note) =>
+        note.title === title
+    )
     if (duplicateNotes.length === 0) {
         notes.push({
             title: title,
@@ -21,21 +21,20 @@ const addNote = function (title, body) {
     }
 }
 
-const removeNote = function(title) {
+const removeNote = (title) => {
     const notes = loadNotes()
-    const target = notes.filter(function (note) {
-        return note.title === title
-    })
-    if (target.length > 0) {
-        delete notes[title]
-        saveNotes(notes)
+    const notesFiltered = notes.filter((note) =>
+        note.title !== title
+    )
+    if (notesFiltered.length != notes.length) {
+        saveNotes(notesFiltered)
         console.log('Note Deleted!!!')
     } else {
         console.log('There is not note with that name')
     }
 }
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
     const dataJson = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJson)
 }
