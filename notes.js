@@ -28,6 +28,7 @@ const removeNote = function(title) {
     })
     if (target.length > 0) {
         delete notes[title]
+        saveNotes(notes)
         console.log('Note Deleted!!!')
     } else {
         console.log('There is not note with that name')
@@ -51,5 +52,6 @@ const loadNotes = function () {
 
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
