@@ -9,7 +9,18 @@ request({ url: url, json: true }, (error, response) => {
         + today.precipProbability + '% chance of rain.')
 })
 
-request({ url: mapsApi, json: true}, (error, response) => {
-    const point = response.body.features[0].geometry.coordinates
-    console.log(point[0] + ',' + point[1])
+request({ url: mapsApi, json: true }, (error, response) => {
+    debugger
+    if (error) {
+        console.log('Unable to connect to location service!')
+    } else if (response.body.error) {
+        console.log('Unable to find location')
+    } else {
+        if (!response.body.features || response.body.features.length == 0) {
+            console.log('Unable to find location: ')
+        } else {
+            const point = response.body.features[0].geometry.coordinates
+            console.log(point[0] + ',' + point[1])
+        }
+    }
 })
