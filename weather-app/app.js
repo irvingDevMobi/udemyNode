@@ -3,11 +3,14 @@ const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
 geocode('Neza', (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
-
-forecast(37.8267, -122.4233, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
+    if (error) {
+        return console.log(error)
+    }
+    forecast(data.latitude, data.longitude, (error, forecastData) => {
+        if (error) {
+            return console.log(error)
+        }
+        console.log(data.location)
+        console.log(forecastData)
+    })
 })
